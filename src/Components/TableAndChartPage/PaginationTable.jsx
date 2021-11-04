@@ -9,9 +9,9 @@ import TablePagination from "@mui/material/TablePagination";
 import { PaginationTableActions } from "./PaginationTableActions";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import {TableHead} from "@mui/material";
+import { TableHead } from "@mui/material";
 
-export default function PaginationTable({header, rows, colSpan}) {
+export default function PaginationTable({ header, rows, colSpan }) {
     const [tablePage, setTablePage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(7);
 
@@ -33,9 +33,7 @@ export default function PaginationTable({header, rows, colSpan}) {
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-                <TableHead>
-                    {header}
-                </TableHead>
+                <TableHead>{header}</TableHead>
                 <TableBody>
                     {(rowsPerPage > 0
                         ? rows.slice(
@@ -47,13 +45,7 @@ export default function PaginationTable({header, rows, colSpan}) {
                         const cells = [];
                         Object.values(row).forEach((cellValue, i) => {
                             cells.push(
-                                <TableCell
-                                    style={{ width: 160 }}
-                                    align="right"
-                                    key={i}
-                                >
-                                    {cellValue}
-                                </TableCell>
+                                <TableCell key={i}>{cellValue}</TableCell>
                             );
                         });
                         return <TableRow key={index}>{cells}</TableRow>;

@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { apiKey } from "./apiKey";
-import AppContext from "./AppContext";
-import MediaCard from "./Components/MediaCard/MediaCard";
-import ResponsiveDatePicker from "./Components/ResponsiveDatePicker/ResponsiveDatePicker";
-import RenderCode from "./Components/SnackbarAlert/RenderCode";
-import { nasaAPICall } from "./API/nasaAPICall";
-import SnackbarAlert from "./Components/SnackbarAlert/SnackbarAlert";
+import { apiKey } from "../../../apiKey";
+import AppContext from "../../../AppContext";
+import MediaCard from "../../MediaCard/MediaCard";
+import ResponsiveDatePicker from "../../ResponsiveDatePicker/ResponsiveDatePicker";
+import RenderCode from "../../SnackbarAlert/RenderCode";
+import { nasaAPICall } from "../../../API/nasaAPICall";
+import SnackbarAlert from "../../SnackbarAlert/SnackbarAlert";
 import { CircularProgress } from "@mui/material";
+import { yyyy_mm_dd } from "../../../helpers/yyyy_mm_dd";
 
-export function Home() {
+export function APOD() {
     const { state, dispatch } = useContext(AppContext);
 
     const [date, setDate] = useState(new Date());
@@ -24,15 +25,13 @@ export function Home() {
         url: null,
     });
 
-    const getDate = () =>
-        `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-
     useEffect(() => {
         nasaAPICall(
-            `https://api.nasa.gov/planetary/apod?date=${getDate()}&api_key=${apiKey}`
+            `https://api.nasa.gov/planetary/apod?date=${yyyy_mm_dd(
+                date
+            )}&api_key=${apiKey}`
         )
             .then((response) => {
-                console.log(response);
                 setAPOD({
                     copyright: response.copyright,
                     date: response.date,

@@ -5,16 +5,13 @@ import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { CardActions, CardMedia } from "@mui/material";
 import { getContainerHeight } from "./getContainerHeight";
-import ResponsiveDatePicker from "../ResponsiveDatePicker/ResponsiveDatePicker";
+import CircularIntegration from "../CircularIntegration/CircularIntegration";
 
 export default function MediaCard({
     component,
     url,
     title,
     explanation,
-    date,
-    mediaType,
-    copyright,
     children,
 }) {
     const [height, setHeight] = useState(getContainerHeight());
@@ -32,12 +29,27 @@ export default function MediaCard({
 
     return (
         <Card>
-            <CardMedia
-                image={url}
-                alt={title}
-                component={component}
-                height={height * 0.7 - bottom}
-            />
+            {!!url ? (
+                <CardMedia
+                    image={url}
+                    alt={title}
+                    component={component}
+                    height={height * 0.7 - bottom}
+                />
+            ) : (
+                <CardMedia
+                    component={"div"}
+                    sx={{
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        // background: '#000',
+                        height: height * 0.7 - bottom,
+                    }}
+                >
+                    <CircularIntegration />
+                </CardMedia>
+            )}
             <CardContent
                 sx={{ maxHeight: height * 0.3 - bottom, overflowY: "scroll" }}
             >
