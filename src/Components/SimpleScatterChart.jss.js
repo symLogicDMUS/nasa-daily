@@ -5,7 +5,7 @@ export const useStyles = makeStyles(
         earthMap: (props) => ({
             position: "relative",
             left: "7.5%",
-            top: -props.size.height * 0.99,
+            top: -props.size.height,
             width: props.size.width * 0.9,
             height: props.size.height * 0.9,
             stroke: theme.palette.primary.main,

@@ -27,7 +27,12 @@ export function MyAppBar(props) {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" noWrap component="div">
+                <Typography
+                    variant="subtitle1"
+                    noWrap
+                    component="div"
+                    sx={{ opacity: 0.9 }}
+                >
                     {title}
                 </Typography>
             </Toolbar>

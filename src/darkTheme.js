@@ -20,6 +20,7 @@ const darkTheme = {
         secondary: {
             main: "#ffca47",
             light: "#fffd79",
+
             dark: "#c89a06",
             contrastText: "#1c252b",
         },

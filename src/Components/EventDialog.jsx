@@ -1,9 +1,23 @@
-import {Dialog, DialogContent, DialogTitle, Link, ListItem, Typography} from "@mui/material";
+import {
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    Link,
+    ListItem,
+    Typography,
+} from "@mui/material";
 import List from "@mui/material/List";
 import React from "react";
 import * as PropTypes from "prop-types";
 
-export default function EventDialog({open, latitude, longitude, title, sources, onBackdropClick}) {
+export default function EventDialog({
+    open,
+    latitude,
+    longitude,
+    title,
+    sources,
+    onBackdropClick,
+}) {
     return (
         <Dialog open={open} onBackdropClick={onBackdropClick}>
             <DialogTitle>{title}</DialogTitle>
@@ -14,7 +28,10 @@ export default function EventDialog({open, latitude, longitude, title, sources, 
                 {!!sources && (
                     <List disablePadding>
                         {sources.map((source, index) => (
-                            <ListItem key={index} sx={{padding: 0, paddingLeft: '1rem'}}>
+                            <ListItem
+                                key={index}
+                                sx={{ padding: 0, paddingLeft: "1rem" }}
+                            >
                                 <Link href={source}>○ {source}</Link>
                             </ListItem>
                         ))}
