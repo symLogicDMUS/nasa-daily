@@ -3,14 +3,15 @@ import { appDefaultState } from "./appDefaultState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ResponsiveDrawer from "./Components/ResponsiveDrawer/ResponsiveDrawer";
+import MarsRoverPhotos from "./Components/APIComponents/MarsRoverPhotos/MarsRoverPhotos";
+import { APOD } from "./Components/APIComponents/APOD/APOD";
+import { EONET } from "./Components/APIComponents/EONET/EONET";
 import { CssBaseline } from "@mui/material";
 import AppContext from "./AppContext";
 import lightTheme from "./lightTheme";
 import darkTheme from "./darkTheme";
 import { reducer } from "./App.red";
-import { APOD } from "./Components/APIComponents/APOD/APOD";
 import "./App.scss";
-import MarsRoverPhotos from "./Components/APIComponents/MarsRoverPhotos/MarsRoverPhotos";
 
 function App() {
     const [state, dispatch] = useReducer(reducer, appDefaultState);
@@ -55,6 +56,19 @@ function App() {
                                     }
                                 >
                                     <MarsRoverPhotos {...props} />
+                                </ResponsiveDrawer>
+                            )}
+                        />
+                        <Route
+                            exact
+                            path="/EONET"
+                            component={(props) => (
+                                <ResponsiveDrawer
+                                    title={
+                                        "EONET: The Earth Observatory Natural Event Tracker"
+                                    }
+                                >
+                                    <EONET {...props} />
                                 </ResponsiveDrawer>
                             )}
                         />

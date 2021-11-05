@@ -1,14 +1,14 @@
-import {apiKey} from "../../../apiKey";
+import { apiKey } from "../../../apiKey";
 import Paper from "@mui/material/Paper";
-import React, {useContext, useEffect, useReducer} from "react";
-import {Stack} from "@mui/material";
+import React, { useContext, useEffect, useReducer } from "react";
+import { Stack } from "@mui/material";
 import CircularIntegration from "../../CircularIntegration/CircularIntegration";
 import ResponsiveDatePicker from "../../ResponsiveDatePicker/ResponsiveDatePicker";
-import {nasaAPICall} from "../../../API/nasaAPICall";
+import { nasaAPICall } from "../../../API/nasaAPICall";
 import AppContext from "../../../AppContext";
 import SnackbarAlert from "../../SnackbarAlert/SnackbarAlert";
-import {useTheme} from "@mui/material/styles";
-import {reducer} from "./MarsRoverPhotos.red";
+import { useTheme } from "@mui/material/styles";
+import { reducer } from "./MarsRoverPhotos.red";
 import RoverPhoto from "./RoverPhoto";
 
 export default function MarsRoverPhotos() {

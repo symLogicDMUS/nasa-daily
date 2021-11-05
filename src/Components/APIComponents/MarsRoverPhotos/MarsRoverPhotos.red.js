@@ -1,4 +1,4 @@
-import {getSol} from "../../../helpers/getSol";
+import { getSol } from "../../../helpers/getSol";
 
 export function reducer(state, action) {
     let date;

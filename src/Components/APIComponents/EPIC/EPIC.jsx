@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { nasaAPICall } from "../../../API/nasaAPICall";
 import RenderCode from "../../SnackbarAlert/RenderCode";
 import { apiKey } from "../../../apiKey";
-import { yyyy_mm_dd } from "../../../helpers/yyyy_mm_dd";
 
 export default function EPIC(props) {
     const [data, setData] = useState(null);

@@ -1,4 +1,20 @@
 const darkTheme = {
+    breakpoints: {
+        keys: [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+        ],
+        values: {
+            xs: 0,
+            sm: 900,
+            md: 1200,
+            lg: 1536,
+            xl: 2304,
+        }
+    },
     palette: {
         mode: "dark",
         primary: {
@@ -8,9 +24,9 @@ const darkTheme = {
             contrastText: "#1c252b",
         },
         secondary: {
-            main: "#cd91d6",
-            light: "#ffc2ff",
-            dark: "#9b62a4",
+            main: "#ffca47",
+            light: "#fffd79",
+            dark: "#c89a06",
             contrastText: "#1c252b",
         },
         background: {
