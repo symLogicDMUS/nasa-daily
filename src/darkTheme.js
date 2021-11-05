@@ -1,19 +1,13 @@
 const darkTheme = {
     breakpoints: {
-        keys: [
-            "xs",
-            "sm",
-            "md",
-            "lg",
-            "xl",
-        ],
+        keys: ["xs", "sm", "md", "lg", "xl"],
         values: {
             xs: 0,
             sm: 900,
             md: 1200,
             lg: 1536,
             xl: 2304,
-        }
+        },
     },
     palette: {
         mode: "dark",
