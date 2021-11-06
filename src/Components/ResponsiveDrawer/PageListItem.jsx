@@ -12,7 +12,6 @@ export function PageListItem({ pageTitle, children }) {
 
     return (
         <ListItem button onClick={goToPage}>
-            {/*<ListItemIcon></ListItemIcon>*/}
             <ListItemText primary={pageTitle} />
         </ListItem>
     );

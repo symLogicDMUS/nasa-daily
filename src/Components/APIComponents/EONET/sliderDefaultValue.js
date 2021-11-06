@@ -1,1 +1,1 @@
-export const sliderDefaultValue = 1000
+export const sliderDefaultValue = 1000;

@@ -1,31 +1,27 @@
-import { getSize } from "../../getSize";
-import { Link, Paper, Slider, Stack, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import React, { useEffect, useMemo, useState } from "react";
-import {
-    CartesianGrid,
-    Scatter,
-    ScatterChart,
-    Tooltip,
-    XAxis,
-    YAxis,
-    ZAxis,
-} from "recharts";
-import { CustomTooltip } from "../../CustomTooltip";
-import EventDialog from "../../EventDialog";
-import { ReactComponent as EarthMap } from "../../earth outline.svg";
-import { useStyles } from "../../SimpleScatterChart.jss";
 import Box from "@mui/material/Box";
-import PrimarySearch from "../../Search/PrimarySearch";
+import { getSize } from "../../getSize";
+import { sliderMax } from "./sliderMax";
+import * as PropTypes from "prop-types";
+import EventDialog from "../../EventDialog";
+import { SearchField } from "./SearchField";
+import NumberTextField from "./NumberTextField";
+import { useTheme } from "@mui/material/styles";
+import { CustomTooltip } from "../../CustomTooltip";
 import { sliderDefaultValue } from "./sliderDefaultValue";
-import {sliderMax} from "./sliderMax";
+import React, { useEffect, useMemo, useState } from "react";
+import { ReactComponent as EarthMap } from "../../earth outline.svg";
+import { Link, Paper, Slider, Stack, Typography } from "@mui/material";
+import {CartesianGrid, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis} from "recharts";
+import { useStyles } from "../../SimpleScatterChart.jss";
 
+SearchField.propTypes = { theme: PropTypes.any };
 export default function EarthEventScatterChart({ data }) {
     const [size, setSize] = useState(getSize());
     useEffect(() => {
         function handleResize() {
             setSize(getSize());
         }
+
         window.addEventListener("resize", handleResize);
         return (_) => {
             window.removeEventListener("resize", handleResize);
@@ -61,7 +57,18 @@ export default function EarthEventScatterChart({ data }) {
 
     const [eventNumber, setEventNumber] = useState(sliderDefaultValue);
     const adjustEventNumber = (e) => {
-        setEventNumber(e.target.value);
+        const n = e.target.value;
+        if (isNaN(Number(n))) {
+            if (n === "") {
+                setEventNumber(1)
+            } else {
+                setEventNumber(sliderDefaultValue)
+            }
+        } else if (Number(n) > sliderMax) {
+            setEventNumber(sliderMax)
+        } else {
+            setEventNumber(n);
+        }
     };
 
     const events = useMemo(() => {
@@ -124,31 +131,44 @@ export default function EarthEventScatterChart({ data }) {
                 pt={6}
                 sx={{ position: "relative", top: -size.height }}
             >
-                <Typography variant={"body"} sx={{ opacity: 0.9 }}>
-                    Storms are regularly spotted in the tropics, dust storms
-                    over deserts, forest fires in the summers. These events are
-                    occurring constantly and{" "}
-                    <Link
-                        href={
-                            "https://worldview.earthdata.nasa.gov/?v=-171.44332957697642,-46.546875,40.662079576976424,53.015625&t=2021-11-05-T19%3A42%3A52Z"
-                        }
-                    >
-                        NASA EOSDIS’ Worldview
-                    </Link>{" "}
-                    tracks them all
-                </Typography>
+                <Box pt={2} pb={2}>
+                    <Typography variant={"body"} sx={{ opacity: 0.9 }}>
+                        Storms are regularly spotted in the tropics, dust storms
+                        over deserts, forest fires in the summers. These events are
+                        occurring constantly and{" "}
+                        <Link
+                            href={
+                                "https://worldview.earthdata.nasa.gov/?v=-171.44332957697642,-46.546875,40.662079576976424,53.015625&t=2021-11-05-T19%3A42%3A52Z"
+                            }
+                        >
+                            NASA EOSDIS’ Worldview
+                        </Link>{" "}
+                        tracks them all
+                    </Typography>
+                </Box>
                 <Stack
                     spacing={{ xs: 1, sm: 2, md: 4 }}
                     direction={{ xs: "column", sm: "row" }}
+                    pt={2}
+                    pb={2}
                 >
+                    <NumberTextField
+                        value={eventNumber}
+                        onChange={adjustEventNumber}
+                    />
                     <Slider
+                        min={1}
+                        max={sliderMax}
+                        sx={{ width: "50%", transform: `translate(0, ${theme.spacing(0.5)})` }}
                         value={eventNumber}
                         valueLabelDisplay="auto"
                         onChange={adjustEventNumber}
-                        min={1}
-                        max={sliderMax}
                     />
-                    <PrimarySearch handleChange={updateSearchText} />
+                    <SearchField
+                        theme={theme}
+                        value={searchText}
+                        handleChange={updateSearchText}
+                    />
                 </Stack>
             </Box>
             <EventDialog

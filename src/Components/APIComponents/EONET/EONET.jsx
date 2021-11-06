@@ -6,11 +6,10 @@ import { getArraySubset } from "../../../helpers/getArraySubset";
 import CircularIntegration from "../../CircularIntegration/CircularIntegration";
 
 export function EONET() {
-
     const [state, setState] = useState(null);
     useEffect(() => {
         // const events = getArraySubset(sampleAPI.events, sliderMax);
-        const events = sampleAPI.events.slice(0, sliderMax)
+        const events = sampleAPI.events.slice(0, sliderMax);
         const data = [];
         events.forEach((event) => {
             if (!!event.geometries) {
