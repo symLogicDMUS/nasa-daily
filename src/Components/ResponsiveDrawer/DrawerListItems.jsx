@@ -1,9 +1,10 @@
 import * as React from "react";
 import List from "@mui/material/List";
+import { pages } from "../../pages";
+import {ListItem} from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 import { PageListItem } from "./PageListItem";
-import { pages } from "../../pages";
 import { routeDictionary } from "../../routes/routeDictionary";
 
 export function DrawerListItems() {
@@ -17,6 +18,9 @@ export function DrawerListItems() {
                         {routeDictionary[pageTitle]}
                     </PageListItem>
                 ))}
+                <ListItem button disabled>
+                    More coming soon
+                </ListItem>
             </List>
         </div>
     );

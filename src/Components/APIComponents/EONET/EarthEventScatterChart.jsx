@@ -2,11 +2,11 @@ import Box from "@mui/material/Box";
 import { getSize } from "../../getSize";
 import { sliderMax } from "./sliderMax";
 import * as PropTypes from "prop-types";
-import EventDialog from "../../EventDialog";
+import EventDialog from "./EventDialog";
 import { SearchField } from "./SearchField";
 import NumberTextField from "./NumberTextField";
 import { useTheme } from "@mui/material/styles";
-import { CustomTooltip } from "../../CustomTooltip";
+import { CustomTooltip } from "./CustomTooltip";
 import { sliderDefaultValue } from "./sliderDefaultValue";
 import React, { useEffect, useMemo, useState } from "react";
 import { ReactComponent as EarthMap } from "../../earth outline.svg";
@@ -43,10 +43,11 @@ export default function EarthEventScatterChart({ data }) {
     const handlePointClick = (e) => {
         setDialog({
             open: true,
-            title: e.payload.payload.title,
-            sources: e.payload.payload.sources,
             latitude: e.payload.x,
             longitude: e.payload.y,
+            title: e.payload.payload.title,
+            date: String(e.payload.payload.date),
+            sources: e.payload.payload.sources,
         });
     };
 
@@ -173,6 +174,7 @@ export default function EarthEventScatterChart({ data }) {
             </Box>
             <EventDialog
                 open={dialog.open}
+                date={dialog.date}
                 title={dialog.title}
                 sources={dialog.sources}
                 latitude={dialog.latitude}

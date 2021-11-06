@@ -5,13 +5,11 @@ export const useStyles = makeStyles(
     (theme) => ({
         paper: {
             backgroundColor:
-                theme.palette.mode === "dark"
-                    ? alpha(theme.palette.common.white, 0.15)
-                    : "#f0f0f0",
+                theme.palette.mode === "dark" ? "#132f4c" : "#f0f0f0",
             "&:hover": {
                 backgroundColor:
                     theme.palette.mode === "dark"
-                        ? alpha(theme.palette.common.white, 0.25)
+                        ? lighten("#132f4c", 0.05)
                         : lighten("#f0f0f0", 0.35),
             },
             width: "50%",
@@ -28,8 +26,8 @@ export const useStyles = makeStyles(
             color: theme.palette.mode === "dark" ? "#fff" : "#000",
             "&::placeholder": {
                 fontFamily: theme.typography.fontFamily,
-                fontSize: '1.1rem',
-                color: '#ffffff66',
+                fontSize: theme.typography.htmlFontSize,
+                color: "#ffffff66",
             },
             transform: `translate(0, -0.1rem)`,
         },

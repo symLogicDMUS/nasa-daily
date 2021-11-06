@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme } from "@mui/material/styles";
-import { lighten, Paper, Typography } from "@mui/material";
+import {Paper, Typography } from "@mui/material";
 
 export const CustomTooltip = ({ active, payload, label }) => {
     const theme = useTheme();
@@ -13,7 +13,7 @@ export const CustomTooltip = ({ active, payload, label }) => {
                     background: theme.palette.background.paper + "aa",
                 }}
             >
-                <Typography>{`${payload[2].value.title}`}</Typography>
+                <Typography><strong>{`${payload[2].value.title}`}</strong></Typography>
             </Paper>
         );
     } else {

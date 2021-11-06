@@ -1,7 +1,7 @@
 export const pages = [
     "Home",
-    "EPIC",
+    // "EPIC",
     "EONET",
     "Mars Rover Photos",
-    "NASA Image and Video Library",
+    // "NASA Image and Video Library",
 ];
