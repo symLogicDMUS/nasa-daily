@@ -7,9 +7,9 @@ const lightTheme = {
             main: "#0a66c2",
         },
         secondary: {
-            main: "#FF9900",
-            light: "#ffca47",
-            dark: "#c66a00",
+            main: "#60ad5e",
+            light: "#91df8c",
+            dark: "#2e7d32",
         },
         background: {
             default: lighten("#0a66c2", 0.9),
