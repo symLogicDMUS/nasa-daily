@@ -12,8 +12,8 @@ export const useStyles = makeStyles(
                         ? lighten("#132f4c", 0.05)
                         : lighten("#f0f0f0", 0.35),
             },
-            width: "50%",
             padding: theme.spacing(1, 1, 1, 2),
+            minWidth: 320,
             display: "flex",
         },
         input: {
@@ -27,7 +27,7 @@ export const useStyles = makeStyles(
             "&::placeholder": {
                 fontFamily: theme.typography.fontFamily,
                 fontSize: theme.typography.htmlFontSize,
-                color: "#ffffff66",
+                color: theme.palette.text.secondary,
             },
             transform: `translate(0, -0.1rem)`,
         },

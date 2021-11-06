@@ -9,12 +9,13 @@ import { NumberFormatCustom } from "./NumberFormatCustom";
 export const useStyles = makeStyles(
     (theme) => ({
         input: {
-            [theme.breakpoints.up("sm")]: {
-                width: "4rem",
-            },
-            [theme.breakpoints.down("sm")]: {
-                width: "95%",
-            },
+            // [theme.breakpoints.up("sm")]: {
+            //     width: "4rem",
+            // },
+            // [theme.breakpoints.down("sm")]: {
+            //     width: "95%",
+            // },
+            minWidth: "3rem",
             borderRadius: 2,
             paddingLeft: "0.5rem",
             "& .MuiInput-input": {

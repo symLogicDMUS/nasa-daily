@@ -25,37 +25,37 @@ export function APOD() {
         url: null,
     });
 
-    useEffect(() => {
-        nasaAPICall(
-            `https://api.nasa.gov/planetary/apod?date=${yyyy_mm_dd(
-                date
-            )}&api_key=${apiKey}`
-        )
-            .then((response) => {
-                setAPOD({
-                    copyright: response.copyright,
-                    date: response.date,
-                    explanation: response.explanation,
-                    hdurl: response.hdurl,
-                    media_type: response.media_type,
-                    service_version: response.service_version,
-                    title: response.title,
-                    url: response.url,
-                });
-            })
-            .catch((err) => {
-                console.log("ERROR retrieving picture of the day:", err);
-                dispatch({
-                    type: "new-alert",
-                    alert: {
-                        ...state.alert,
-                        message: `ERROR retrieving picture of the day: ${err}`,
-                        severity: "error",
-                        open: true,
-                    },
-                });
-            });
-    }, [date]);
+    // useEffect(() => {
+    //     nasaAPICall(
+    //         `https://api.nasa.gov/planetary/apod?date=${yyyy_mm_dd(
+    //             date
+    //         )}&api_key=${apiKey}`
+    //     )
+    //         .then((response) => {
+    //             setAPOD({
+    //                 copyright: response.copyright,
+    //                 date: response.date,
+    //                 explanation: response.explanation,
+    //                 hdurl: response.hdurl,
+    //                 media_type: response.media_type,
+    //                 service_version: response.service_version,
+    //                 title: response.title,
+    //                 url: response.url,
+    //             });
+    //         })
+    //         .catch((err) => {
+    //             console.log("ERROR retrieving picture of the day:", err);
+    //             dispatch({
+    //                 type: "new-alert",
+    //                 alert: {
+    //                     ...state.alert,
+    //                     message: `ERROR retrieving picture of the day: ${err}`,
+    //                     severity: "error",
+    //                     open: true,
+    //                 },
+    //             });
+    //         });
+    // }, [date]);
 
     const component = !APOD.url || !APOD.hdurl ? null : "img";
 

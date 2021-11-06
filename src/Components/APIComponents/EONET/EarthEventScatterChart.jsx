@@ -1,34 +1,18 @@
 import Box from "@mui/material/Box";
-import { getSize } from "../../getSize";
+import { Paper } from "@mui/material";
 import { sliderMax } from "./sliderMax";
-import * as PropTypes from "prop-types";
 import EventDialog from "./EventDialog";
-import { SearchField } from "./SearchField";
-import NumberTextField from "./NumberTextField";
+import React, { useMemo, useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import { CustomTooltip } from "./CustomTooltip";
+import EarthEventActions from "./EarthEventActions";
 import { sliderDefaultValue } from "./sliderDefaultValue";
-import React, { useEffect, useMemo, useState } from "react";
 import { ReactComponent as EarthMap } from "../../earth outline.svg";
-import { Link, Paper, Slider, Stack, Typography } from "@mui/material";
-import {CartesianGrid, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis} from "recharts";
-import { useStyles } from "../../SimpleScatterChart.jss";
+import { MyResponsiveScatterPlot }
+    from "../../MyResponsiveScatterPlot/MyResponsiveScatterPlot";
+import { useStyles } from "../../EarthEventScatterChart.jss";
 
-SearchField.propTypes = { theme: PropTypes.any };
 export default function EarthEventScatterChart({ data }) {
-    const [size, setSize] = useState(getSize());
-    useEffect(() => {
-        function handleResize() {
-            setSize(getSize());
-        }
-
-        window.addEventListener("resize", handleResize);
-        return (_) => {
-            window.removeEventListener("resize", handleResize);
-        };
-    });
-
-    const classes = useStyles({ size });
+    const classes = useStyles();
 
     const theme = useTheme();
 
@@ -61,12 +45,12 @@ export default function EarthEventScatterChart({ data }) {
         const n = e.target.value;
         if (isNaN(Number(n))) {
             if (n === "") {
-                setEventNumber(1)
+                setEventNumber(1);
             } else {
-                setEventNumber(sliderDefaultValue)
+                setEventNumber(sliderDefaultValue);
             }
         } else if (Number(n) > sliderMax) {
-            setEventNumber(sliderMax)
+            setEventNumber(sliderMax);
         } else {
             setEventNumber(n);
         }
@@ -85,93 +69,24 @@ export default function EarthEventScatterChart({ data }) {
     }, [searchText, eventNumber, data, data.length]);
 
     return (
-        <Paper sx={{ padding: theme.spacing(2) }}>
-            <ScatterChart
-                width={size.width}
-                height={size.height}
-                style={{ zIndex: 2 }}
-            >
-                <CartesianGrid
-                    strokeDasharray="3 3"
-                    stroke={
-                        theme.palette.mode === "dark"
-                            ? "rgba(255, 255, 255, 0.2)"
-                            : "rgba(0, 0, 0, 0.2)"
-                    }
+        <Paper
+            sx={{
+                background:
+                    theme.palette.mode === "dark" ? "#0d294655" : "inherit",
+            }}
+        >
+            <Box className={classes.scatterPlot}>
+                <MyResponsiveScatterPlot
+                    data={[{ id: "events", data: events }]}
                 />
-                <XAxis
-                    type="number"
-                    dataKey="x"
-                    name="latitude"
-                    unit="º"
-                    domain={[-180, 180]}
-                    tick={{ fill: theme.palette.text.primary }}
-                />
-                <YAxis
-                    type="number"
-                    dataKey="y"
-                    name="longitude"
-                    unit="º"
-                    domain={[-82, 82]}
-                    tick={{ fill: theme.palette.text.primary }}
-                />
-                <ZAxis dataKey="payload" />
-                <Tooltip content={<CustomTooltip />} />
-                <Scatter
-                    name="Earth"
-                    data={events}
-                    fill={theme.palette.secondary.main}
-                    style={{ cursor: "pointer" }}
-                    onClick={handlePointClick}
-                />
-            </ScatterChart>
-            <EarthMap className={classes.earthMap} />
-            <Box
-                pl={3}
-                pr={3}
-                pt={6}
-                sx={{ position: "relative", top: -size.height }}
-            >
-                <Box pt={2} pb={2}>
-                    <Typography variant={"body"} sx={{ opacity: 0.9 }}>
-                        Storms are regularly spotted in the tropics, dust storms
-                        over deserts, forest fires in the summers. These events are
-                        occurring constantly and{" "}
-                        <Link
-                            href={
-                                "https://worldview.earthdata.nasa.gov/?v=-171.44332957697642,-46.546875,40.662079576976424,53.015625&t=2021-11-05-T19%3A42%3A52Z"
-                            }
-                        >
-                            NASA EOSDIS’ Worldview
-                        </Link>{" "}
-                        tracks them all
-                    </Typography>
-                </Box>
-                <Stack
-                    spacing={{ xs: 1, sm: 2, md: 4 }}
-                    direction={{ xs: "column", sm: "row" }}
-                    pt={2}
-                    pb={2}
-                >
-                    <NumberTextField
-                        value={eventNumber}
-                        onChange={adjustEventNumber}
-                    />
-                    <Slider
-                        min={1}
-                        max={sliderMax}
-                        sx={{ width: "50%", transform: `translate(0, ${theme.spacing(0.5)})` }}
-                        value={eventNumber}
-                        valueLabelDisplay="auto"
-                        onChange={adjustEventNumber}
-                    />
-                    <SearchField
-                        theme={theme}
-                        value={searchText}
-                        handleChange={updateSearchText}
-                    />
-                </Stack>
             </Box>
+            <EarthMap className={classes.earthMap} />
+            <EarthEventActions
+                eventNumber={eventNumber}
+                adjustEventNumber={adjustEventNumber}
+                updateSearchText={updateSearchText}
+                searchText={searchText}
+            />
             <EventDialog
                 open={dialog.open}
                 date={dialog.date}

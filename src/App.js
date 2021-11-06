@@ -6,7 +6,7 @@ import ResponsiveDrawer from "./Components/ResponsiveDrawer/ResponsiveDrawer";
 import MarsRoverPhotos from "./Components/APIComponents/MarsRoverPhotos/MarsRoverPhotos";
 import { APOD } from "./Components/APIComponents/APOD/APOD";
 import { EONET } from "./Components/APIComponents/EONET/EONET";
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import AppContext from "./AppContext";
 import lightTheme from "./lightTheme";
 import darkTheme from "./darkTheme";

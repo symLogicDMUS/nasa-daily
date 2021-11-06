@@ -1,8 +1,8 @@
 import * as React from "react";
-import {useContext} from "react";
-import {Tooltip} from "@mui/material";
+import { useContext } from "react";
+import { Tooltip } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
-import {GitHub} from "@mui/icons-material";
+import { GitHub } from "@mui/icons-material";
 import AppContext from "../../AppContext";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import { drawerWidth } from "./ResponsiveDrawer.jss";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
-
 
 export function MyAppBar(props) {
     const { handleDrawerToggle, title } = props;
@@ -22,8 +21,8 @@ export function MyAppBar(props) {
         <AppBar
             position="fixed"
             sx={{
-                width: { sm: `calc(100% - ${drawerWidth}px)` },
-                ml: { sm: `${drawerWidth}px` },
+                width: { md: `calc(100% - ${drawerWidth}px)` },
+                ml: { md: `${drawerWidth}px` },
             }}
         >
             <Toolbar>
@@ -32,22 +31,28 @@ export function MyAppBar(props) {
                     aria-label="open drawer"
                     edge="start"
                     onClick={handleDrawerToggle}
-                    sx={{ mr: 2, display: { sm: "none" } }}
+                    sx={{ mr: 2, display: { md: "none" } }}
                 >
                     <MenuIcon />
                 </IconButton>
                 <img
                     src={"/Images/title.svg"}
                     alt={"title of app"}
-                    style={{height: 24, marginRight: '1rem', cursor: "pointer"}}
-                    onClick={() => window.location.href = "https://api.nasa.gov/"}
+                    style={{
+                        height: 24,
+                        marginRight: "1rem",
+                        cursor: "pointer",
+                    }}
+                    onClick={() =>
+                        (window.location.href = "https://api.nasa.gov/")
+                    }
                 />
                 <Tooltip title={title}>
                     <Typography
                         variant="subtitle1"
                         noWrap
                         component="div"
-                        sx={{ opacity: 0.9, marginRight: 'auto' }}
+                        sx={{ opacity: 0.9, marginRight: "auto" }}
                     >
                         {title}
                     </Typography>

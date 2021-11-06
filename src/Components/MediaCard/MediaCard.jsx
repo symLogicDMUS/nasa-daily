@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import { CardActions, CardMedia } from "@mui/material";
 import { getContainerHeight } from "./getContainerHeight";
 import CircularIntegration from "../CircularIntegration/CircularIntegration";
+import { useTheme } from "@mui/material/styles";
 
 export default function MediaCard({
     component,
@@ -26,6 +27,8 @@ export default function MediaCard({
     });
 
     const bottom = 64;
+
+    const theme = useTheme();
 
     return (
         <Card>
@@ -50,17 +53,28 @@ export default function MediaCard({
                     <CircularIntegration />
                 </CardMedia>
             )}
-            <CardContent
-                sx={{ maxHeight: height * 0.3 - bottom, overflowY: "scroll" }}
+            <CardActions sx={{ height: bottom, padding: theme.spacing(2) }}>
+                {children}
+            </CardActions>
+            <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{
+                    paddingLeft: theme.spacing(2),
+                    paddingRight: theme.spacing(2),
+                    margin: 0,
+                }}
             >
-                <Typography gutterBottom variant="h5" component="div">
-                    {title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {explanation}
-                </Typography>
-            </CardContent>
-            <CardActions sx={{ height: bottom }}>{children}</CardActions>
+                {title}
+            </Typography>
+            <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ padding: theme.spacing(2) }}
+            >
+                {explanation}
+            </Typography>
         </Card>
     );
 }
