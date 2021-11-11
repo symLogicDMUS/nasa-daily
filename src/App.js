@@ -1,5 +1,5 @@
 import { useMemo, useReducer } from "react";
-import { appDefaultState } from "./appDefaultState";
+import { appDefaultState } from "./context/appDefaultState";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ResponsiveDrawer from "./Components/ResponsiveDrawer/ResponsiveDrawer";
@@ -7,9 +7,9 @@ import MarsRoverPhotos from "./Components/APIComponents/MarsRoverPhotos/MarsRove
 import { APOD } from "./Components/APIComponents/APOD/APOD";
 import { EONET } from "./Components/APIComponents/EONET/EONET";
 import { Box, CssBaseline } from "@mui/material";
-import AppContext from "./AppContext";
-import lightTheme from "./lightTheme";
-import darkTheme from "./darkTheme";
+import AppContext from "./context/AppContext";
+import lightTheme from "./theme/lightTheme";
+import darkTheme from "./theme/darkTheme";
 import { reducer } from "./App.red";
 import "./App.scss";
 

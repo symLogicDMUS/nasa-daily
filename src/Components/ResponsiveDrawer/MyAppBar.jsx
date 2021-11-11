@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Tooltip } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import { GitHub } from "@mui/icons-material";
-import AppContext from "../../AppContext";
+import AppContext from "../../context/AppContext";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";

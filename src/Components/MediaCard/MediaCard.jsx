@@ -46,11 +46,10 @@ export default function MediaCard({
                         width: "100%",
                         display: "flex",
                         flexDirection: "column",
-                        // background: '#000',
                         height: height * 0.7 - bottom,
                     }}
                 >
-                    <CircularIntegration />
+                    <CircularIntegration style={{ margin: "auto" }} />
                 </CardMedia>
             )}
             <CardActions sx={{ height: bottom, padding: theme.spacing(2) }}>

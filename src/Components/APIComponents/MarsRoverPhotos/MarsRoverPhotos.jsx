@@ -5,7 +5,7 @@ import { Stack } from "@mui/material";
 import CircularIntegration from "../../CircularIntegration/CircularIntegration";
 import ResponsiveDatePicker from "../../ResponsiveDatePicker/ResponsiveDatePicker";
 import { nasaAPICall } from "../../../API/nasaAPICall";
-import AppContext from "../../../AppContext";
+import AppContext from "../../../context/AppContext";
 import SnackbarAlert from "../../SnackbarAlert/SnackbarAlert";
 import { useTheme } from "@mui/material/styles";
 import { reducer } from "./MarsRoverPhotos.red";

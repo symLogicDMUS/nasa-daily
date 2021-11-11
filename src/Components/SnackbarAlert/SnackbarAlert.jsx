@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Alert, Snackbar } from "@mui/material";
 import AlertTitle from "@mui/material/AlertTitle";
-import AppContext from "../../AppContext";
+import AppContext from "../../context/AppContext";
 
 function SnackbarAlert(props) {
     const { state, dispatch } = useContext(AppContext);

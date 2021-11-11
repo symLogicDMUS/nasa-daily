@@ -20,7 +20,7 @@ export const getScatterPlotTheme = (theme) => ({
         line: {
             stroke: theme.palette.divider,
             strokeWidth: 0.5,
-            strokeStyle: 'dashed',
+            strokeStyle: "dashed",
         },
     },
 });

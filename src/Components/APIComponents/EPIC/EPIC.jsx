@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { nasaAPICall } from "../../../API/nasaAPICall";
-import RenderCode from "../../SnackbarAlert/RenderCode";
+import RenderCode from "../../RenderCode/RenderCode";
 import { apiKey } from "../../../apiKey";
 
 export default function EPIC(props) {

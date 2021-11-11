@@ -1,27 +1,32 @@
-import { useStyles } from "../../EarthEventScatterChart.jss";
-import { useTheme } from "@mui/material/styles";
+import React from "react";
 import Box from "@mui/material/Box";
-import { Link, Slider, Stack, Typography } from "@mui/material";
-import NumberTextField from "./NumberTextField";
 import { sliderMax } from "./sliderMax";
 import { SearchField } from "./SearchField";
-import React from "react";
+import NumberTextField from "./NumberTextField";
+import { useTheme } from "@mui/material/styles";
+import { Link, Slider, Stack, Typography } from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
+
+export const useStyles = makeStyles((theme) => ({}), { index: 1 });
 
 export default function EarthEventActions({
+    size,
     eventNumber,
     adjustEventNumber,
     searchText,
     updateSearchText,
 }) {
-    const classes = useStyles();
     const theme = useTheme();
+
     return (
-        <Box p={{ xs: 1, sm: 2, md: 3 }} className={classes.actions}>
-            <Stack
-                mb={3}
-                spacing={3}
-                direction={{ xs: "column", sm: "row" }}
-            >
+        <Box
+            p={{ xs: 1, sm: 2, md: 3 }}
+            sx={{
+                transform: `translate(0, -${size.height}px)`,
+            }}
+        >
+            <Stack mb={3} spacing={3} direction={{ xs: "column", sm: "row" }}>
                 <NumberTextField
                     value={eventNumber}
                     onChange={adjustEventNumber}

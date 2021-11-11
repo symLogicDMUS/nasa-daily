@@ -1,6 +1,6 @@
 import * as React from "react";
 import List from "@mui/material/List";
-import { pages } from "../../pages";
+import { pages } from "../../routes/pages";
 import { ListItem } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";

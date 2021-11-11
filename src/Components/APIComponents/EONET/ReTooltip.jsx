@@ -2,7 +2,7 @@ import React from "react";
 import { useTheme } from "@mui/material/styles";
 import { Paper, Typography } from "@mui/material";
 
-export const CustomTooltip = ({ active, payload, label }) => {
+export const ReTooltip = ({ active, payload, label }) => {
     const theme = useTheme();
     if (active && payload && payload.length) {
         return (

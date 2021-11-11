@@ -1,22 +1,17 @@
-import Box from "@mui/material/Box";
-import { Paper } from "@mui/material";
+import React, { Suspense } from "react";
+import { Backdrop, Paper } from "@mui/material";
 import { sliderMax } from "./sliderMax";
 import EventDialog from "./EventDialog";
-import React, { useMemo, useState } from "react";
-import { useTheme } from "@mui/material/styles";
+import ReScatterChart from "./ReScatterChart";
 import EarthEventActions from "./EarthEventActions";
+import { ReactComponent as EarthMap } from "./earth map.svg";
 import { sliderDefaultValue } from "./sliderDefaultValue";
-import { ReactComponent as EarthMap } from "../../earth outline.svg";
-import { MyResponsiveScatterPlot }
-    from "../../MyResponsiveScatterPlot/MyResponsiveScatterPlot";
-import { useStyles } from "../../EarthEventScatterChart.jss";
+import { getContainerWidth } from "../../getContainerWidth";
+import { useStyles } from "./EarthEventScatterChart.jss";
+import CircularIntegration from "../../CircularIntegration/CircularIntegration";
 
 export default function EarthEventScatterChart({ data }) {
-    const classes = useStyles();
-
-    const theme = useTheme();
-
-    const [dialog, setDialog] = useState({
+    const [dialog, setDialog] = React.useState({
         open: false,
         title: "",
         sources: "",
@@ -35,12 +30,12 @@ export default function EarthEventScatterChart({ data }) {
         });
     };
 
-    const [searchText, setSearchText] = useState("");
+    const [searchText, setSearchText] = React.useState("");
     const updateSearchText = (e) => {
         setSearchText(e.target.value);
     };
 
-    const [eventNumber, setEventNumber] = useState(sliderDefaultValue);
+    const [eventNumber, setEventNumber] = React.useState(sliderDefaultValue);
     const adjustEventNumber = (e) => {
         const n = e.target.value;
         if (isNaN(Number(n))) {
@@ -56,7 +51,7 @@ export default function EarthEventScatterChart({ data }) {
         }
     };
 
-    const events = useMemo(() => {
+    const events = React.useMemo(() => {
         let newData = data;
         if (searchText !== "") {
             newData = data.filter((event) =>
@@ -68,24 +63,47 @@ export default function EarthEventScatterChart({ data }) {
         return newData.slice(0, eventNumber);
     }, [searchText, eventNumber, data, data.length]);
 
+    const [size, setSize] = React.useState({
+        width: getContainerWidth(),
+        height: getContainerWidth() * 0.486022,
+    });
+    React.useEffect(() => {
+        function handleResize() {
+            setSize({
+                width: getContainerWidth(),
+                height: getContainerWidth() * 0.486022,
+            });
+        }
+        window.addEventListener("resize", handleResize);
+        return (_) => {
+            window.removeEventListener("resize", handleResize);
+        };
+    });
+
+    const classes = useStyles({ size });
+
     return (
-        <Paper
-            sx={{
-                background:
-                    theme.palette.mode === "dark" ? "#0d294655" : "inherit",
-            }}
-        >
-            <Box className={classes.scatterPlot}>
-                <MyResponsiveScatterPlot
-                    data={[{ id: "events", data: events }]}
+        <Paper>
+            <Suspense
+                fallback={
+                    <Backdrop sx={{ display: "flex" }} open>
+                        <CircularIntegration style={{ margin: "auto" }} />
+                    </Backdrop>
+                }
+            >
+                <ReScatterChart
+                    size={size}
+                    events={events}
+                    handlePointClick={handlePointClick}
                 />
-            </Box>
+            </Suspense>
             <EarthMap className={classes.earthMap} />
             <EarthEventActions
+                size={size}
+                searchText={searchText}
                 eventNumber={eventNumber}
                 adjustEventNumber={adjustEventNumber}
                 updateSearchText={updateSearchText}
-                searchText={searchText}
             />
             <EventDialog
                 open={dialog.open}

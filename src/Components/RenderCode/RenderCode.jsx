@@ -11,7 +11,7 @@ import {
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vs, atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import IconButton from "@mui/material/IconButton";
-import AppContext from "../../AppContext";
+import AppContext from "../../context/AppContext";
 
 function RenderCode({
     file = "",

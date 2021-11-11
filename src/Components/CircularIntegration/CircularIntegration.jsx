@@ -1,10 +1,10 @@
 import * as React from "react";
-import {Stack} from "@mui/material";
+import { Stack } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ReactComponent as NASA } from "../MediaCard/nasa_logo.svg";
-import {useTheme} from "@emotion/react";
+import { useTheme } from "@emotion/react";
 
-export default function CircularIntegration() {
+export default function CircularIntegration({ ...props }) {
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
 
@@ -26,20 +26,20 @@ export default function CircularIntegration() {
         }
     };
 
-    const theme = useTheme()
+    const theme = useTheme();
 
     return (
-        <Stack>
+        <Stack {...props}>
             <CircularProgress
                 size={100}
                 thickness={2}
-                sx={{color: theme.palette.mode==="dark"?"#fff":"#ff3f23"}}
+                sx={{ color: "#ff3f23" }}
             />
             <NASA
                 style={{
                     width: 65,
                     height: 65,
-                    position: 'relative',
+                    position: "relative",
                     left: 20,
                     top: -80,
                 }}
