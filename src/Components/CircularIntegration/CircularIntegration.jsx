@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Stack } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import { ReactComponent as NASA } from "../MediaCard/nasa_logo.svg";
+import { ReactComponent as NASA } from "../APIComponents/APOD/APODMediaCard/nasa_logo.svg";
 import { useTheme } from "@emotion/react";
 
 export default function CircularIntegration({ ...props }) {

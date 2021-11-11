@@ -1,6 +1,6 @@
 import { vw } from "../helpers/windowMeasurements";
 import { getContainerWidth } from "./getContainerWidth";
-import { getContainerHeight } from "./MediaCard/getContainerHeight";
+import { getContainerHeight } from "./APIComponents/APOD/APODMediaCard/getContainerHeight";
 
 export function getSize() {
     if (vw() > 960) {

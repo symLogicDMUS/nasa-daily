@@ -1,9 +1,15 @@
-import {useState} from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import ScrollFab from "../../ScrollFab/ScrollFab";
 import { ReactComponent as GlobeIcon } from "./globe_icon.svg";
-import {Alert, AlertTitle, Paper, Snackbar, useMediaQuery} from "@mui/material";
+import {
+    Alert,
+    AlertTitle,
+    Paper,
+    Snackbar,
+    useMediaQuery,
+} from "@mui/material";
 
 export default function MapDefaultMessage() {
     const [defaultAlert, setDefaultAlert] = useState(true);
@@ -42,9 +48,7 @@ export default function MapDefaultMessage() {
                     </Alert>
                 </Paper>
             </Snackbar>
-            {!defaultAlert && lg && (
-                <ScrollFab showOnce />
-            )}
+            {!defaultAlert && lg && <ScrollFab showOnce />}
         </>
     );
 }

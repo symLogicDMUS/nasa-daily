@@ -4,10 +4,7 @@
  * @constructor
  */
 
-export const getNewDisplayValue = (
-    showOnce,
-    element
-) => {
+export const getNewDisplayValue = (showOnce, element) => {
     if (showOnce) {
         return false;
     }

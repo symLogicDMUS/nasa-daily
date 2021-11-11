@@ -5,14 +5,16 @@ import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { CardActions, CardMedia } from "@mui/material";
 import { getContainerHeight } from "./getContainerHeight";
-import CircularIntegration from "../CircularIntegration/CircularIntegration";
+import CircularIntegration from "../../../CircularIntegration/CircularIntegration";
 import { useTheme } from "@mui/material/styles";
+import ResponsiveDatePicker from "../../../ResponsiveDatePicker/ResponsiveDatePicker";
+import RenderCode from "../../../RenderCode/RenderCode";
 
-export default function MediaCard({
-    component,
-    url,
+export default function APODMediaCard({
+    date,
     title,
     explanation,
+    onDateChange,
     children,
 }) {
     const [height, setHeight] = useState(getContainerHeight());
@@ -30,30 +32,27 @@ export default function MediaCard({
 
     const theme = useTheme();
 
+    const media = !!children ? (
+        children
+    ) : (
+        <CardMedia
+            sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                height: height * 0.7 - bottom,
+            }}
+            component="div"
+        >
+            <CircularIntegration style={{ margin: "auto" }} />
+        </CardMedia>
+    );
+
     return (
         <Card>
-            {!!url ? (
-                <CardMedia
-                    image={url}
-                    alt={title}
-                    component={component}
-                    height={height * 0.7 - bottom}
-                />
-            ) : (
-                <CardMedia
-                    component={"div"}
-                    sx={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        height: height * 0.7 - bottom,
-                    }}
-                >
-                    <CircularIntegration style={{ margin: "auto" }} />
-                </CardMedia>
-            )}
+            {media}
             <CardActions sx={{ height: bottom, padding: theme.spacing(2) }}>
-                {children}
+                <ResponsiveDatePicker value={date} onChange={onDateChange} />
             </CardActions>
             <Typography
                 gutterBottom

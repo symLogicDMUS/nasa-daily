@@ -1,24 +1,21 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { apiKey } from "../../../apiKey";
 import AppContext from "../../../context/AppContext";
-import MediaCard from "../../MediaCard/MediaCard";
+import APODMediaCard from "./APODMediaCard/APODMediaCard";
 import { nasaAPICall } from "../../../API/nasaAPICall";
 import { yyyy_mm_dd } from "../../../helpers/yyyy_mm_dd";
 import SnackbarAlert from "../../SnackbarAlert/SnackbarAlert";
-import ResponsiveDatePicker from "../../ResponsiveDatePicker/ResponsiveDatePicker";
+import { getContainerHeight } from "./APODMediaCard/getContainerHeight";
+import { CardMedia } from "@mui/material";
+import {useTheme} from "@mui/material";
 
 export function APOD() {
     const { state, dispatch } = React.useContext(AppContext);
 
-    const [date, setDate] = React.useState(new Date());
-
     const [APOD, setAPOD] = React.useState({
-        copyright: "",
-        date: "",
+        date: new Date(),
         explanation: "",
-        hdurl: null,
         media_type: "",
-        service_version: "",
         title: "",
         url: null,
     });
@@ -26,17 +23,14 @@ export function APOD() {
     React.useEffect(() => {
         nasaAPICall(
             `https://api.nasa.gov/planetary/apod?date=${yyyy_mm_dd(
-                date
+                APOD.date
             )}&api_key=${apiKey}`
         )
             .then((response) => {
                 setAPOD({
-                    copyright: response.copyright,
-                    date: response.date,
+                    date: APOD.date,
                     explanation: response.explanation,
-                    hdurl: response.hdurl,
                     media_type: response.media_type,
-                    service_version: response.service_version,
                     title: response.title,
                     url: response.url,
                 });
@@ -53,33 +47,67 @@ export function APOD() {
                     },
                 });
             });
-    }, [date]);
+    }, [APOD.date]);
 
-    const component = !APOD.url || !APOD.hdurl ? null : "img";
+    const [cardHeight, setCardHeight] = useState(getContainerHeight());
+    useEffect(() => {
+        function handleResize() {
+            setCardHeight(getContainerHeight());
+        }
+        window.addEventListener("resize", handleResize);
+        return (_) => {
+            window.removeEventListener("resize", handleResize);
+        };
+    });
+
+    const theme = useTheme()
+
+    const mediaComponent = () => {
+        const bottom = 64;
+        if (!APOD.url) {
+            return null;
+        }
+        switch (APOD.media_type) {
+            case "video":
+                return (
+                    <iframe
+                        src={APOD.url}
+                        title={APOD.title}
+                        style={{
+                            width: "100%",
+                            height: cardHeight * 0.7 - bottom,
+                            border: `1px solid ${theme.palette.divider}`
+                        }}
+                    />
+                );
+            default:
+                return (
+                    <CardMedia
+                        image={APOD.url}
+                        alt={APOD.title}
+                        component="img"
+                        height={cardHeight * 0.7 - bottom}
+                    />
+                );
+        }
+    };
 
     return (
         <>
-            <MediaCard
-                url={APOD.url}
+            <APODMediaCard
                 date={APOD.date}
                 title={APOD.title}
-                copyright={APOD.copyright}
-                mediaType={APOD.media_type}
                 explanation={APOD.explanation}
-                component={component}
+                onDateChange={(newValue) => {
+                    setAPOD({
+                        ...APOD,
+                        url: null,
+                        date: newValue,
+                    });
+                }}
             >
-                <ResponsiveDatePicker
-                    value={date}
-                    onChange={(newValue) => {
-                        setAPOD({
-                            ...APOD,
-                            url: null,
-                            hdurl: null,
-                        });
-                        setDate(newValue);
-                    }}
-                />
-            </MediaCard>
+                {mediaComponent()}
+            </APODMediaCard>
             <SnackbarAlert />
         </>
     );

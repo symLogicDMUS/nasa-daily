@@ -3,7 +3,7 @@ import {
     appBarHeightLg,
     appBarHeightMd,
     appBarHeightSm,
-} from "../ResponsiveDrawer/ResponsiveDrawer.jss";
+} from "../../../ResponsiveDrawer/ResponsiveDrawer.jss";
 
 const padding = 24;
 

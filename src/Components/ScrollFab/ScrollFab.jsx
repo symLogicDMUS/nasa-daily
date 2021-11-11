@@ -4,28 +4,22 @@ import { useTheme } from "@mui/material/styles";
 import { ArrowDownward } from "@mui/icons-material";
 import { getNewDisplayValue } from "./getNewDisplayValue";
 import { useEffect, useState } from "react";
-import {vh} from "../../helpers/windowMeasurements";
+import { vh } from "../../helpers/windowMeasurements";
 
-export default function ScrollFab({
-    showOnce = false,
-    element = "html",
-}) {
+export default function ScrollFab({ showOnce = false, element = "html" }) {
     const [display, setDisplay] = useState(true);
     useEffect(() => {
         function handleChange() {
-            setDisplay(
-                getNewDisplayValue(showOnce, element)
-            );
+            setDisplay(getNewDisplayValue(showOnce, element));
         }
         window.addEventListener("scroll", handleChange);
         return (_) => {
             window.removeEventListener("scroll", handleChange);
-
         };
     });
 
     const scroll = () => {
-        if (element==="html") {
+        if (element === "html") {
             window.document.documentElement.scrollTop = vh() * 0.5;
         } else {
             window.document.body.scrollTop = vh() * 0.5;

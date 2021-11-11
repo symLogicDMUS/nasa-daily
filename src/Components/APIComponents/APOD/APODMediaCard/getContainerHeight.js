@@ -1,9 +1,9 @@
-import { vh, vw } from "../../helpers/windowMeasurements";
+import { vh, vw } from "../../../../helpers/windowMeasurements";
 import {
     appBarHeightLg,
     appBarHeightMd,
     appBarHeightSm,
-} from "../ResponsiveDrawer/ResponsiveDrawer.jss";
+} from "../../../ResponsiveDrawer/ResponsiveDrawer.jss";
 
 export function getContainerHeight() {
     let containerHeightSm = vh() - appBarHeightSm;
