@@ -12,7 +12,7 @@ export function EONET() {
     const { state, dispatch } = useContext(AppContext);
     const [source, setSource] = useState(null);
     useEffect(() => {
-        nasaAPICall("https://eonet.sci.gsfc.nasa.gov/api/v2.1/events").then(
+        nasaAPICall("https://eonet.gsfc.nasa.gov/api/v2.1/events").then(
             (result) => {
                 const events = getArraySubset(result.events, sliderMax);
                 const data = [];
